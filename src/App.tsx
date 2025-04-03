@@ -222,7 +222,7 @@ function App() {
               className={`border-1 border-black h-1/7 w-1/4 max-h-1/7 hover:bg-red-400 select-none ${
                 item.slot === null ? 'bg-gray-500' : item.img
               }`}
-              onClick={() => handleItemClick(item, index)}
+              onMouseDown={() => handleItemClick(item, index)}
             >
               <p>{item.slot}</p>
             </div>
