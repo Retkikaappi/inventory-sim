@@ -1,56 +1,231 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
-type Inventory = {
-  clicked: boolean;
+type ItemSlot =
+  | 'head'
+  | 'cape'
+  | 'neck'
+  | 'ammo'
+  | 'weapon'
+  | 'shield'
+  | 'two-handed'
+  | 'body'
+  | 'legs'
+  | 'hands'
+  | 'feet'
+  | 'ring';
+
+type Item = {
+  equipped: boolean;
+  slot: ItemSlot;
+  img: string;
+};
+
+type EmptySlot = {
+  equipped: null;
+  slot: null;
+};
+
+type Slot = Item | EmptySlot;
+
+const initInventory = (): Slot[] => {
+  const inv = [];
+  for (let i = 0; i < 28; i++) {
+    inv.push({ equipped: null, slot: null });
+  }
+
+  return inv;
+};
+
+const initEquipment = () => {
+  const set: Item[] = [
+    {
+      equipped: true,
+      slot: 'two-handed',
+      img: 'bg-yellow-600',
+    },
+    {
+      equipped: true,
+      slot: 'body',
+      img: 'bg-yellow-600',
+    },
+    {
+      equipped: true,
+      slot: 'cape',
+      img: 'bg-yellow-600',
+    },
+    {
+      equipped: true,
+      slot: 'hands',
+      img: 'bg-yellow-600',
+    },
+    {
+      equipped: true,
+      slot: 'head',
+      img: 'bg-yellow-600',
+    },
+    {
+      equipped: true,
+      slot: 'legs',
+      img: 'bg-yellow-600',
+    },
+    {
+      equipped: true,
+      slot: 'neck',
+      img: 'bg-yellow-600',
+    },
+    {
+      equipped: true,
+      slot: 'ring',
+      img: 'bg-yellow-600',
+    },
+  ];
+  return set;
 };
 
 function App() {
-  const [inventory, setInventory] = useState<Inventory[]>(
-    Array(28).fill({
-      clicked: false,
-    })
-  );
-  const [pendingInv, setPendingInv] = useState<Inventory[]>(inventory);
+  const [equipment, setEquipment] = useState<Item[]>(initEquipment);
+  const [inventory, setInventory] = useState<Slot[]>(initInventory);
+  const [, setPendingChages] = useState<(() => void)[]>([]);
+  const [tickTimer, setTickTimer] = useState<number | null>(null);
+  const isTimerRunning = useRef(false);
+  const [tickCounter, setTickCounter] = useState(0);
 
-  console.log(inventory);
-
-  useEffect(() => {
-    setInventory(pendingInv);
-  }, [pendingInv]);
-
-  // setInterval(() => {
-  //   setInventory(pendingInv);
-  // }, 600);
-  const handleItemClick = (item, index) => {
-    setPendingInv(
-      pendingInv.map((e, i) => {
-        return i === index ? { clicked: !e.clicked } : { clicked: e.clicked };
-      })
-    );
+  const addGearSet = () => {
+    const set: Item[] = [
+      {
+        equipped: false,
+        slot: 'two-handed',
+        img: 'bg-blue-500',
+      },
+      {
+        equipped: false,
+        slot: 'body',
+        img: 'bg-blue-500',
+      },
+      {
+        equipped: false,
+        slot: 'cape',
+        img: 'bg-blue-500',
+      },
+      {
+        equipped: false,
+        slot: 'hands',
+        img: 'bg-blue-500',
+      },
+      {
+        equipped: false,
+        slot: 'head',
+        img: 'bg-blue-500',
+      },
+      {
+        equipped: false,
+        slot: 'legs',
+        img: 'bg-blue-500',
+      },
+      {
+        equipped: false,
+        slot: 'neck',
+        img: 'bg-blue-500',
+      },
+      {
+        equipped: false,
+        slot: 'ring',
+        img: 'bg-blue-500',
+      },
+    ];
+    setInventory([...set, ...inventory.slice(set.length)]);
   };
 
+  useEffect(() => addGearSet(), []);
+
+  useEffect(() => {
+    if (tickTimer === null) return;
+
+    const timer = setTimeout(() => {
+      setPendingChages((updates) => {
+        updates.forEach((call) => call());
+        return [];
+      });
+      setTickCounter((prev) => prev + 1);
+      setTickTimer(null);
+      isTimerRunning.current = false;
+    }, 600);
+
+    return () => clearTimeout(timer);
+  }, [tickTimer]);
+
+  const saveInput = ({ equipped, slot, img }: Item, index: number) => {
+    const equippedItem = equipment.find((e) => e.slot === slot);
+    if (equippedItem) {
+      setEquipment((prev) =>
+        prev.map((e) =>
+          e.slot === slot ? { equipped: !equipped, slot, img } : e
+        )
+      );
+      setInventory((prev) =>
+        prev.map((e, i) => (i === index ? equippedItem : e))
+      );
+    }
+  };
+
+  const handleItemClick = (item: Slot, index: number) => {
+    if (item.slot === null) return;
+    setPendingChages((prev) => [...prev, () => saveInput(item, index)]);
+
+    if (!isTimerRunning.current) {
+      setTickTimer(600);
+      isTimerRunning.current = true;
+    }
+  };
   const handleReset = () => {
-    setInventory(Array(28).fill({ clicked: false }));
-    setPendingInv(Array(28).fill({ clicked: false }));
+    setInventory(initInventory);
+    setEquipment(initEquipment);
+    addGearSet();
+    setPendingChages([]);
+    setTickTimer(null);
+    setTickCounter(0);
+    isTimerRunning.current = false;
   };
 
   return (
-    <div className='border-1'>
-      <div className='m-20 border-1 border-red-800 flex flex-col items-center justify-center'>
-        <button onClick={handleReset} className='p-2 m-2 bg-neutral-500'>
-          reset
-        </button>
+    <div className='text-center'>
+      <p>{tickCounter}</p>
+      <button
+        onClick={handleReset}
+        className='p-2 m-2 bg-neutral-600 rounded-sm cursor-pointer hover:brightness-125 transition'
+      >
+        Reset
+      </button>
+      <button
+        className='p-2 m-2 bg-neutral-600 rounded-sm cursor-pointer hover:brightness-125 transition'
+        onClick={addGearSet}
+      >
+        Add set
+      </button>
+      <div className='mx-40 flex items-center justify-center gap-20'>
+        <div className='h-100 w-65 border-1 border-blue-500 flex flex-wrap content-start'>
+          {equipment.map((item, index) => (
+            <div
+              key={index}
+              className={`border-1 h-1/7 w-1/4 max-h-1/7 hover:bg-red-600 select-none ${
+                item.slot === null ? 'bg-gray-500' : item.img
+              }`}
+            >
+              <p>{item.slot}</p>
+            </div>
+          ))}
+        </div>
         <div className='h-100 w-65 border-1 border-blue-500 flex flex-wrap'>
           {inventory.map((item, index) => (
             <div
               key={index}
-              className={`border-1 flex-1/4 hover:bg-red-600 select-none  ${
-                inventory[index].clicked === true
-                  ? 'bg-amber-700'
-                  : 'bg-green-700'
+              className={`border-1 border-black h-1/7 w-1/4 max-h-1/7 hover:bg-red-400 select-none ${
+                item.slot === null ? 'bg-gray-500' : item.img
               }`}
               onClick={() => handleItemClick(item, index)}
-            ></div>
+            >
+              <p>{item.slot}</p>
+            </div>
           ))}
         </div>
       </div>
