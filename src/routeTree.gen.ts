@@ -11,11 +11,18 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as ToolsImport } from './routes/tools'
 import { Route as InventoryImport } from './routes/inventory'
-import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
+import { Route as ToolsSlayerImport } from './routes/tools/slayer'
 
 // Create/Update Routes
+
+const ToolsRoute = ToolsImport.update({
+  id: '/tools',
+  path: '/tools',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const InventoryRoute = InventoryImport.update({
   id: '/inventory',
@@ -23,16 +30,16 @@ const InventoryRoute = InventoryImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const AboutRoute = AboutImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const ToolsSlayerRoute = ToolsSlayerImport.update({
+  id: '/slayer',
+  path: '/slayer',
+  getParentRoute: () => ToolsRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -46,13 +53,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
-      parentRoute: typeof rootRoute
-    }
     '/inventory': {
       id: '/inventory'
       path: '/inventory'
@@ -60,49 +60,76 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InventoryImport
       parentRoute: typeof rootRoute
     }
+    '/tools': {
+      id: '/tools'
+      path: '/tools'
+      fullPath: '/tools'
+      preLoaderRoute: typeof ToolsImport
+      parentRoute: typeof rootRoute
+    }
+    '/tools/slayer': {
+      id: '/tools/slayer'
+      path: '/slayer'
+      fullPath: '/tools/slayer'
+      preLoaderRoute: typeof ToolsSlayerImport
+      parentRoute: typeof ToolsImport
+    }
   }
 }
 
 // Create and export the route tree
 
+interface ToolsRouteChildren {
+  ToolsSlayerRoute: typeof ToolsSlayerRoute
+}
+
+const ToolsRouteChildren: ToolsRouteChildren = {
+  ToolsSlayerRoute: ToolsSlayerRoute,
+}
+
+const ToolsRouteWithChildren = ToolsRoute._addFileChildren(ToolsRouteChildren)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/inventory': typeof InventoryRoute
+  '/tools': typeof ToolsRouteWithChildren
+  '/tools/slayer': typeof ToolsSlayerRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/inventory': typeof InventoryRoute
+  '/tools': typeof ToolsRouteWithChildren
+  '/tools/slayer': typeof ToolsSlayerRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/inventory': typeof InventoryRoute
+  '/tools': typeof ToolsRouteWithChildren
+  '/tools/slayer': typeof ToolsSlayerRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/inventory'
+  fullPaths: '/' | '/inventory' | '/tools' | '/tools/slayer'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/inventory'
-  id: '__root__' | '/' | '/about' | '/inventory'
+  to: '/' | '/inventory' | '/tools' | '/tools/slayer'
+  id: '__root__' | '/' | '/inventory' | '/tools' | '/tools/slayer'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
   InventoryRoute: typeof InventoryRoute
+  ToolsRoute: typeof ToolsRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
   InventoryRoute: InventoryRoute,
+  ToolsRoute: ToolsRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -116,18 +143,25 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about",
-        "/inventory"
+        "/inventory",
+        "/tools"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/about": {
-      "filePath": "about.tsx"
-    },
     "/inventory": {
       "filePath": "inventory.tsx"
+    },
+    "/tools": {
+      "filePath": "tools.tsx",
+      "children": [
+        "/tools/slayer"
+      ]
+    },
+    "/tools/slayer": {
+      "filePath": "tools/slayer.tsx",
+      "parent": "/tools"
     }
   }
 }

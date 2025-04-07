@@ -4,20 +4,20 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 export const Route = createRootRoute({
   component: () => (
     <>
-      <div className='p-2 flex gap-2'>
+      <div className='p-2 flex gap-2 justify-center'>
         <Link
           activeProps={{ className: `navlink-active` }}
           to='/'
           className='font-bold'
         >
           Home
-        </Link>{' '}
+        </Link>
         <Link
           activeProps={{ className: `navlink-active` }}
-          to='/about'
+          to='/tools'
           className='font-bold'
         >
-          About
+          Tools
         </Link>
         <Link
           activeProps={{ className: `navlink-active` }}

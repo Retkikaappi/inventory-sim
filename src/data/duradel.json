@@ -1,0 +1,310 @@
+[
+  {
+    "name": "Aberrant spectres",
+    "amount": "130-200",
+    "extAmount": "200-250",
+    "requirement": "60",
+    "weight": "7"
+  },
+  {
+    "name": "Abyssal demons",
+    "amount": "130-200",
+    "extAmount": "200-250",
+    "requirement": "85",
+    "weight": "12"
+  },
+  {
+    "name": "Adamant dragons",
+    "amount": "4-9",
+    "extAmount": "20-30",
+    "requirement": "No requirement",
+    "weight": "2"
+  },
+  {
+    "name": "Ankou",
+    "amount": "50-80",
+    "extAmount": "91-150",
+    "requirement": "No requirement",
+    "weight": "5"
+  },
+  {
+    "name": "Araxytes",
+    "amount": "60-80",
+    "extAmount": "200-250",
+    "requirement": "92",
+    "weight": "10"
+  },
+  {
+    "name": "Aviansie",
+    "amount": "120-200",
+    "extAmount": "200-250",
+    "requirement": "No requirement",
+    "weight": "8"
+  },
+  {
+    "name": "Basilisks",
+    "amount": "130-200",
+    "extAmount": "200-250",
+    "requirement": "40",
+    "weight": "7"
+  },
+  {
+    "name": "Black demons",
+    "amount": "130-200",
+    "extAmount": "200-250",
+    "requirement": "No requirement",
+    "weight": "8"
+  },
+  {
+    "name": "Black dragons",
+    "amount": "10-20",
+    "extAmount": "40-60",
+    "requirement": "No requirement",
+    "weight": "9"
+  },
+  {
+    "name": "Bloodveld",
+    "amount": "130-200",
+    "extAmount": "200-250",
+    "requirement": "50",
+    "weight": "8"
+  },
+  {
+    "name": "Blue dragons",
+    "amount": "110-170",
+    "extAmount": "N/A",
+    "requirement": "No requirement",
+    "weight": "4"
+  },
+  {
+    "name": "Boss[n 1]",
+    "amount": "3-35[n 2]",
+    "extAmount": "N/A",
+    "requirement": "No requirement",
+    "weight": "12"
+  },
+  {
+    "name": "Cave horrors",
+    "amount": "130-200",
+    "extAmount": "200-250",
+    "requirement": "58",
+    "weight": "4"
+  },
+  {
+    "name": "Cave kraken",
+    "amount": "100-120",
+    "extAmount": "150-200",
+    "requirement": "87",
+    "weight": "9"
+  },
+  {
+    "name": "Dagannoth",
+    "amount": "130-200",
+    "extAmount": "N/A",
+    "requirement": "No requirement",
+    "weight": "9"
+  },
+  {
+    "name": "Dark beasts",
+    "amount": "10-20",
+    "extAmount": "110-135",
+    "requirement": "90",
+    "weight": "11"
+  },
+  {
+    "name": "Drakes",
+    "amount": "50-110",
+    "extAmount": "N/A",
+    "requirement": "84",
+    "weight": "8"
+  },
+  {
+    "name": "Dust devils",
+    "amount": "130-200",
+    "extAmount": "200-250",
+    "requirement": "65",
+    "weight": "5"
+  },
+  {
+    "name": "Elves",
+    "amount": "110-170",
+    "extAmount": "N/A",
+    "requirement": "No requirement",
+    "weight": "4"
+  },
+  {
+    "name": "Fire giants",
+    "amount": "130-200",
+    "extAmount": "N/A",
+    "requirement": "No requirement",
+    "weight": "7"
+  },
+  {
+    "name": "Fossil Island Wyverns",
+    "amount": "20-50",
+    "extAmount": "55-75",
+    "requirement": "66",
+    "weight": "7"
+  },
+  {
+    "name": "Gargoyles",
+    "amount": "130-200",
+    "extAmount": "200-250",
+    "requirement": "75",
+    "weight": "8"
+  },
+  {
+    "name": "Greater demons",
+    "amount": "130-200",
+    "extAmount": "200-250",
+    "requirement": "No requirement",
+    "weight": "9"
+  },
+  {
+    "name": "Hellhounds",
+    "amount": "130-200",
+    "extAmount": "N/A",
+    "requirement": "No requirement",
+    "weight": "10"
+  },
+  {
+    "name": "Iron dragons",
+    "amount": "40-60",
+    "extAmount": "60-100",
+    "requirement": "No requirement",
+    "weight": "5"
+  },
+  {
+    "name": "Kalphite",
+    "amount": "130-200",
+    "extAmount": "N/A",
+    "requirement": "No requirement",
+    "weight": "9"
+  },
+  {
+    "name": "Kurask",
+    "amount": "130-200",
+    "extAmount": "N/A",
+    "requirement": "70",
+    "weight": "4"
+  },
+  {
+    "name": "Lizardmen",
+    "amount": "130-210",
+    "extAmount": "N/A",
+    "requirement": "No requirement",
+    "weight": "10"
+  },
+  {
+    "name": "Mithril dragons",
+    "amount": "5-10",
+    "extAmount": "25-35",
+    "requirement": "No requirement",
+    "weight": "9"
+  },
+  {
+    "name": "Mutated Zygomites",
+    "amount": "20-30",
+    "extAmount": "N/A",
+    "requirement": "57",
+    "weight": "2"
+  },
+  {
+    "name": "Nechryael",
+    "amount": "130-200",
+    "extAmount": "200-250",
+    "requirement": "80",
+    "weight": "9"
+  },
+  {
+    "name": "Red dragons",
+    "amount": "30-65",
+    "extAmount": "N/A",
+    "requirement": "No requirement",
+    "weight": "8"
+  },
+  {
+    "name": "Rune dragons",
+    "amount": "3-8",
+    "extAmount": "30-60",
+    "requirement": "No requirement",
+    "weight": "2"
+  },
+  {
+    "name": "Skeletal Wyverns",
+    "amount": "20-40",
+    "extAmount": "50-70",
+    "requirement": "72",
+    "weight": "7"
+  },
+  {
+    "name": "Smoke devils",
+    "amount": "130-200",
+    "extAmount": "N/A",
+    "requirement": "93",
+    "weight": "9"
+  },
+  {
+    "name": "Spiritual creatures",
+    "amount": "130-200",
+    "extAmount": "181-250",
+    "requirement": "63",
+    "weight": "7"
+  },
+  {
+    "name": "Steel dragons",
+    "amount": "10-20",
+    "extAmount": "40-60",
+    "requirement": "No requirement",
+    "weight": "7"
+  },
+  {
+    "name": "Suqah",
+    "amount": "60-90",
+    "extAmount": "186-250",
+    "requirement": "No requirement",
+    "weight": "8"
+  },
+  {
+    "name": "Trolls",
+    "amount": "130-200",
+    "extAmount": "N/A",
+    "requirement": "No requirement",
+    "weight": "6"
+  },
+  {
+    "name": "TzHaar",
+    "amount": "130-199",
+    "extAmount": "N/A",
+    "requirement": "No requirement",
+    "weight": "10"
+  },
+  {
+    "name": "Vampyres",
+    "amount": "100-210",
+    "extAmount": "200-250",
+    "requirement": "No requirement",
+    "weight": "8"
+  },
+  {
+    "name": "Warped creatures",
+    "amount": "130-200",
+    "extAmount": "N/A",
+    "requirement": "No requirement",
+    "weight": "8"
+  },
+  {
+    "name": "Waterfiends",
+    "amount": "130-200",
+    "extAmount": "N/A",
+    "requirement": "No requirement",
+    "weight": "2"
+  },
+  {
+    "name": "Wyrms",
+    "amount": "100-160",
+    "extAmount": "N/A",
+    "requirement": "62",
+    "weight": "8"
+  }
+]

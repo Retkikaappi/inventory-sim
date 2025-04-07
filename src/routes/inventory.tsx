@@ -6,9 +6,5 @@ export const Route = createFileRoute('/inventory')({
 });
 
 function InventoryComponent() {
-  return (
-    <div>
-      <Inventory />
-    </div>
-  );
+  return <Inventory />;
 }
