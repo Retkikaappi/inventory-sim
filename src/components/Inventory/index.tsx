@@ -1,31 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
-
-type ItemSlot =
-  | 'head'
-  | 'cape'
-  | 'neck'
-  | 'ammo'
-  | 'weapon'
-  | 'shield'
-  | 'two-handed'
-  | 'body'
-  | 'legs'
-  | 'hands'
-  | 'feet'
-  | 'ring';
-
-type Item = {
-  equipped: boolean;
-  slot: ItemSlot;
-  img: string;
-};
-
-type EmptySlot = {
-  equipped: null;
-  slot: null;
-};
-
-type Slot = Item | EmptySlot;
+import Equipment from './Equipment';
+import { Item, Slot } from '../../types';
 
 const initInventory = (): Slot[] => {
   const inv = [];
@@ -204,18 +179,7 @@ function Inventory() {
         Add set
       </button>
       <div className='mx-40 flex items-center justify-center gap-20'>
-        <div className='h-100 w-65 border-1 border-blue-500 flex flex-wrap content-start'>
-          {equipment.map((item, index) => (
-            <div
-              key={index}
-              className={`border-1 h-1/7 w-1/4 max-h-1/7 hover:bg-red-600 select-none ${
-                item.slot === null ? 'bg-gray-500' : item.img
-              }`}
-            >
-              <p>{item.slot}</p>
-            </div>
-          ))}
-        </div>
+        <Equipment equipment={equipment} />
         <div className='h-100 w-65 border-1 border-blue-500 flex flex-wrap'>
           {inventory.map((item, index) => (
             <div
