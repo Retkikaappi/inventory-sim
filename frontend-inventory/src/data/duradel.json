@@ -77,8 +77,8 @@
     "weight": "4"
   },
   {
-    "name": "Boss[n 1]",
-    "amount": "3-35[n 2]",
+    "name": "Boss",
+    "amount": "3-35",
     "extAmount": "N/A",
     "requirement": "No requirement",
     "weight": "12"

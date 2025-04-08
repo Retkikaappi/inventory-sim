@@ -1,4 +1,4 @@
-export type taskData = {
+export type TaskData = {
   name: string;
   amount: string;
   extAmount: string;
@@ -46,3 +46,23 @@ export type EquippedGear = {
   feet: Item | null;
   ring: Item | null;
 };
+
+type Skill = {
+  id: number;
+  name: string;
+  rank: number;
+  level: number;
+  xp: number;
+}[];
+
+type Activity = {
+  id: number;
+  name: string;
+  rank: number;
+  score: number;
+}[];
+
+export interface Hiscore {
+  skills: Skill;
+  activities: Activity;
+}
