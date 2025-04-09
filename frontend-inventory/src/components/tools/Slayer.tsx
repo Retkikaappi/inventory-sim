@@ -6,6 +6,7 @@ import { getHiscore } from '../../services/hiscoreService';
 
 const Slayer = () => {
   const [duradelTasks, setDuradelTasks] = useState<TaskData[]>(duradelTasksRaw);
+  const [blockList, setBlockList] = useState<TaskData[] | null>(null);
   const [sortAsc, setSortAsc] = useState<boolean>(false);
   const [search, setSearch] = useState<string>('');
 
@@ -50,6 +51,19 @@ const Slayer = () => {
   const handleFetch = () => {
     refetch();
   };
+  const handleAddBlock = (task: TaskData) => {
+    if (blockList) {
+      setBlockList([...blockList, task]);
+      setDuradelTasks(
+        [...duradelTasks].filter((e) => e.name !== task.name && e)
+      );
+    } else {
+      setDuradelTasks(
+        [...duradelTasks].filter((e) => e.name !== task.name && e)
+      );
+      setBlockList([task]);
+    }
+  };
 
   return (
     <div className='flex flex-col justify-center items-center pb-20'>
@@ -72,54 +86,78 @@ const Slayer = () => {
           ) : null
         )}
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th
-              onClick={() => handleArrange('name')}
-              className='p-1 px-4 border-1 border-black hover:text-blue-500 cursor-pointer'
-            >
-              Name
-            </th>
-            <th className='p-1 px-4 border-1 border-black hover:text-blue-500 cursor-pointer'>
-              Amount
-            </th>
-            <th className='p-1 px-4 border-1 border-black hover:text-blue-500 cursor-pointer'>
-              Ext. Amount
-            </th>
-            <th className='p-1 px-4 border-1 border-black hover:text-blue-500 cursor-pointer'>
-              Requirement
-            </th>
-            <th
-              onClick={() => handleArrange('weight')}
-              className='p-1 px-4 border-1 border-black hover:text-blue-500 cursor-pointer'
-            >
-              Weight
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {duradelTasks.map((e, index) => (
-            <tr key={`tr_${index}`} className='text-center text-sm'>
-              <td className='p-1 px-4 text-start border-1 border-black font-semibold'>
-                {e.name}
-              </td>
-              <td className='p-1 px-4 text-start border-1 border-black'>
-                {e.amount}
-              </td>
-              <td className='p-1 px-4 text-start border-1 border-black'>
-                {e.extAmount}
-              </td>
-              <td className='p-1 px-4 text-start border-1 border-black'>
-                {e.requirement}
-              </td>
-              <td className='p-1 px-4 text-start border-1 border-black font-semibold'>
-                {e.weight}
-              </td>
+
+      <div className='flex flex-row gap-4'>
+        {blockList && (
+          <div>
+            <h2 className='font-bold'>Blocked</h2>
+
+            <ul>
+              {blockList.map((e, index) => (
+                <li key={`block_${index}`}>{e.name}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <table>
+          <thead>
+            <tr>
+              <th
+                onClick={() => handleArrange('name')}
+                className='p-1 px-4 border-1 border-black hover:text-blue-500 cursor-pointer'
+              >
+                Name
+              </th>
+              <th className='p-1 px-4 border-1 border-black hover:text-blue-500 cursor-pointer'>
+                Amount
+              </th>
+              <th className='p-1 px-4 border-1 border-black hover:text-blue-500 cursor-pointer'>
+                Ext. Amount
+              </th>
+              <th className='p-1 px-4 border-1 border-black hover:text-blue-500 cursor-pointer'>
+                Requirement
+              </th>
+              <th
+                onClick={() => handleArrange('weight')}
+                className='p-1 px-4 border-1 border-black hover:text-blue-500 cursor-pointer'
+              >
+                Weight
+              </th>
+              <th className='p-1 px-4 border-1 border-black hover:text-blue-500 cursor-pointer'>
+                Add to Blocklist
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {duradelTasks.map((e, index) => (
+              <tr key={`tr_${index}`} className='text-center text-sm'>
+                <td className='p-1 px-4 text-start border-1 border-black font-semibold'>
+                  {e.name}
+                </td>
+                <td className='p-1 px-4 text-start border-1 border-black'>
+                  {e.amount}
+                </td>
+                <td className='p-1 px-4 text-start border-1 border-black'>
+                  {e.extAmount}
+                </td>
+                <td className='p-1 px-4 text-start border-1 border-black'>
+                  {e.requirement}
+                </td>
+                <td className='p-1 px-4 text-start border-1 border-black font-semibold'>
+                  {e.weight}
+                </td>
+                <td
+                  onClick={() => handleAddBlock(e)}
+                  className='p-1 px-4 text-center border-1 border-black font-semibold hover:bg-neutral-500 cursor-pointer'
+                >
+                  Block
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
